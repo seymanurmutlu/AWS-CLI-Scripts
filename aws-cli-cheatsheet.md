@@ -8,3 +8,7 @@ aws ec2 describe-security-groups --query 'SecurityGroups[*].GroupId' --output te
 ```
 aws ec2 describe-security-groups --query 'SecurityGroups[*].[GroupId, GroupName]' --output json
 ```
+**Get all the prefix list with ID and Names**
+```
+aws ec2 describe-managed-prefix-lists --query 'PrefixLists[*].[PrefixListId, PrefixListName]' --output json
+```
