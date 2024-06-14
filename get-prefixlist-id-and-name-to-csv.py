@@ -4,7 +4,7 @@ import json
 import csv
 
 # Run AWS CLI command to describe prefix lists and get JSON output
-aws_cli_command = "aws ec2 describe-managed-prefix-lists --query 'PrefixLists[*].[PrefixListId, PrefixListName]' --output json"
+aws_cli_command = "aws ec2 describe-managed-prefix-lists --query 'PrefixLists[*].[PrefixListId, PrefixListName]'  --profile AWS_ReadOnly-853713009882 --output json"
 aws_cli_process = subprocess.Popen(aws_cli_command, shell=True, stdout=subprocess.PIPE)
 aws_cli_output, _ = aws_cli_process.communicate()
 aws_cli_output = aws_cli_output.decode("utf-8")

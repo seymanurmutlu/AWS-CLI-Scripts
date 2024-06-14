@@ -1,3 +1,4 @@
+## Gets Security Group Rule id and security groups with attached instances and saves to csv.
 import json
 import subprocess
 import csv
@@ -55,8 +56,8 @@ sg_result = subprocess.run(['aws', 'ec2', 'describe-security-group-rules'], stdo
 security_group_rules = json.loads(sg_result.stdout)
 
 # List all instances
-#instances_result = subprocess.run(['aws', 'ec2', 'describe-instances'], stdout=subprocess.PIPE)
-#instances = json.loads(instances_result.stdout)
+instances_result = subprocess.run(['aws', 'ec2', 'describe-instances'], stdout=subprocess.PIPE)
+instances = json.loads(instances_result.stdout)
 instances = load_json_from_file('instances.json')
 # For testing purposes, I'm using the instances data you have previously loaded
 # instances = load_json_from_file('instances.json')

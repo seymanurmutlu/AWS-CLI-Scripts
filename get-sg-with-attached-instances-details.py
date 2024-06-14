@@ -14,12 +14,12 @@ def load_json_from_file(filename):
 
 def get_attached_instances(security_group_id):
     # List all instances
-    # result = subprocess.run(['aws', 'ec2', 'describe-instances'], stdout=subprocess.PIPE)
-    # instances = json.loads(result.stdout)
+    result = subprocess.run(['aws', 'ec2', 'describe-instances'], stdout=subprocess.PIPE)
+    instances = json.loads(result.stdout)
 
     # Save the instances data to a file
     json_filename = 'instances.json'
-    #save_json_to_file(instances, json_filename)
+    save_json_to_file(instances, json_filename)
 
     # Load the instances data from the file
     instances = load_json_from_file(json_filename)
@@ -59,7 +59,7 @@ sg_result = subprocess.run(['aws', 'ec2', 'describe-security-groups'], stdout=su
 security_groups = json.loads(sg_result.stdout)
 
 # Define the CSV file name
-csv_file = "security_groups-v4.csv"
+csv_file = "security_groups.csv"
 
 # Open the CSV file for writing
 with open(csv_file, mode='w', newline='') as file:

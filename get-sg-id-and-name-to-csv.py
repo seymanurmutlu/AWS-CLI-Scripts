@@ -1,3 +1,4 @@
+# Gets all security group ids and names and saves to csv.
 import subprocess
 import json
 import csv
