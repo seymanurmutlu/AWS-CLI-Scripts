@@ -2,8 +2,11 @@ import boto3
 import pandas as pd
 
 # AWS profilleri
-profiles = [ "DT-Shared-Source-Abdulvehhab-PS-170457940312", "DT-Information-Security-Abdulvehhab-PS-563991483850" ,"CCI-Cloud-Abdulvehhab-PS-076437998716" ]
-
+profiles = [
+    "profile1", "profile2", "profile3", "profile4", "profile5",
+    "profile6", "profile7", "profile8", "profile9", "profile10",
+    "profile11", "profile12"
+]
 def get_session(profile_name):
     return boto3.Session(profile_name=profile_name)
 
