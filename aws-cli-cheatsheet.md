@@ -22,3 +22,18 @@ aws ec2 describe-instances --filters Name=instance.group-id,Values=<SECURITY GRO
 ```
 aws ec2 describe-security-group-rules --security-group-rule-ids <SECURITY GROUP RULE ID>  --output json 
 ```
+
+**Get EC2 Instances and IP Adresses**
+```
+aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,PrivateIpAddress,PublicIpAddress]" --output table
+```
+
+**Get Elastic IPs attached to the EC2 instances**
+```
+aws ec2 describe-addresses --query "Addresses[*].[InstanceId,PublicIp]" --output table
+```
+
+**Get Elastic Load Balancers attached to the EC2 instances**
+```
+aws elb describe-load-balancers --query "LoadBalancerDescriptions[*].[LoadBalancerName,Instances[*].InstanceId]" --output table
+```
