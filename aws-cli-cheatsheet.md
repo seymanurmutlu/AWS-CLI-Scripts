@@ -37,3 +37,43 @@ aws ec2 describe-addresses --query "Addresses[*].[InstanceId,PublicIp]" --output
 ```
 aws elb describe-load-balancers --query "LoadBalancerDescriptions[*].[LoadBalancerName,Instances[*].InstanceId]" --output table
 ```
+
+**Get all EC2s with all private IP addresses**
+```
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,PrivateIpAddresses:NetworkInterfaces[*].PrivateIpAddresses[*].PrivateIpAddress}" --output json   
+```
+
+**Get all EC2s with all public IP addresses**
+```
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,PublicIp:NetworkInterfaces[*].Association.PublicIp}" --output json
+```
+
+**Get all EC2s with all ENI IDs**
+```
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,NetworkInterfaces:NetworkInterfaces[*].NetworkInterfaceId}" --output json
+```
+
+**Get all EC2s with all private ips, public ips, ENI IDs**
+```
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,PrivateIpAddresses:NetworkInterfaces[*].PrivateIpAddresses[*].PrivateIpAddress,PublicIps:NetworkInterfaces[*].Association.PublicIp,NetworkInterfaceIds:NetworkInterfaces[*].NetworkInterfaceId}" --output json
+```
+
+**Get all EC2s with all ENI Details**
+```
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,NetworkInterfaces:NetworkInterfaces}" --output json > ec2_instances_with_enis.json
+```
+
+**Get all Elastic IPs with attached instances and Elastic IP Names**
+```
+aws ec2 describe-addresses --query "Addresses[*].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,ElasticIp:PublicIp}" --output json
+```
+
+**Get all Classic Load Balancer with attached ip**
+```
+aws elb describe-load-balancers --query "LoadBalancerDescriptions[*].{LoadBalancerName:LoadBalancerName,Instances:Instances[*].InstanceId}" --output json > classic_load_balancers.json
+```
+
+**Get all Application and Network Load Balancer with attached instances**
+```
+aws elbv2 describe-load-balancers --query "LoadBalancers[*].{LoadBalancerName:LoadBalancerName,LoadBalancerArn:LoadBalancerArn}" --output json
+```
